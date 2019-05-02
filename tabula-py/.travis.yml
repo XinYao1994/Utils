@@ -1,0 +1,22 @@
+sudo: false
+language: python
+python:
+- 2.7
+- 3.5
+- 3.6
+before_install:
+- pip install --upgrade setuptools
+install:
+- pip install tox
+- pip install tox-travis
+- pip install coverage coveralls
+script:
+- tox -r
+deploy:
+  provider: pypi
+  user: chezou
+  password: $PYPI_PASSWORD
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    python: 3.5
